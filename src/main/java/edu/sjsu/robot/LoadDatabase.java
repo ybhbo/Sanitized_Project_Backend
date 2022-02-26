@@ -15,8 +15,10 @@ class LoadDatabase {
     CommandLineRunner initDatabase(ReportRepository repository) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new SanitizedReport("ENG187", 10, 50, (long) 0)));
-            log.info("Preloading " + repository.save(new SanitizedReport("ENG188", 120, 100, (long) 0)));
+            // log.info("Preloading " + repository.save(new SanitizedReport("ENG187", 10,
+            // 50, (long) 0)));
+            // log.info("Preloading " + repository.save(new SanitizedReport("ENG188", 120,
+            // 100, (long) 0)));
 
         };
     }
