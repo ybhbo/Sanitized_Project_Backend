@@ -12,4 +12,6 @@ interface ReportRepository extends JpaRepository<SanitizedReport, Long> {
 
    public List<SanitizedReport> findTop10ByOrderByIdDesc();
 
+   List<SanitizedReport> findByStartGreaterThan(Long time);
+
 }

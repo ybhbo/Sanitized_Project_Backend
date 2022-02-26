@@ -1,5 +1,12 @@
 package edu.sjsu.robot;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -53,13 +60,30 @@ class ReportController {
         }
         return record.getBatteryPercentage();
     }
-    // Single item
 
-    // @GetMapping("/Reports/{timestamp}")
-    // SanitizedReport one(@PathVariable Long timestamp) {
+    @CrossOrigin
+    @GetMapping("/today/workload")
+    Float getTodayWorkload() {
+        ZonedDateTime today = ZonedDateTime.ofInstant(Instant.now().truncatedTo(ChronoUnit.DAYS),
+                ZoneId.of("America/Los_Angeles"));
 
-    // return repository.findById(id)
-    // .orElseThrow(() -> new NotFoundException(Long.toString(id)));
-    // }
+        var record = repository.findByStartGreaterThan(today.toEpochSecond());
+        if (record == null) {
+            return 0.0f;
+        }
+        return (float) record.stream().mapToDouble(r -> r.getDuration()).sum();
+    }
+
+    @CrossOrigin
+    @GetMapping("/month/workload")
+    Float getMonthWorkload() {
+        var firstOfMonth = LocalDateTime.now().withDayOfMonth(1);
+
+        var record = repository.findByStartGreaterThan(firstOfMonth.toEpochSecond(ZoneOffset.of("-08:00")));
+        if (record == null) {
+            return 0.0f;
+        }
+        return (float) record.stream().mapToDouble(r -> r.getDuration()).sum();
+    }
 
 }

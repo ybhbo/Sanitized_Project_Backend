@@ -1,5 +1,11 @@
 package edu.sjsu.robot.model;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -17,9 +23,6 @@ public class SanitizedReport {
     private Long start;
     private Long end;
     private float duration;
-
-    // //
-    // [{"id":1,"location":"ENG187","hours":10.0,"batteryPercentage":50.0,"timestamp":1645833825},
 
     SanitizedReport() {
     }
@@ -106,5 +109,4 @@ public class SanitizedReport {
         return "SanitizedReport [location=" + location + ", batteryPercentage=" + batteryPercentage + ", start=" + start
                 + ", end=" + end + ", duration=" + duration + "]";
     }
-
 }

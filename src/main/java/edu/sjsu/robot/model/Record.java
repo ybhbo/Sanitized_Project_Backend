@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 import ch.qos.logback.core.util.Duration;
@@ -23,9 +24,9 @@ public class Record {
         id = sanitizedReport.getId();
         sanitizedHours = sanitizedReport.getDuration();
         location = sanitizedReport.getLocation();
-        date = Instant.ofEpochSecond(sanitizedReport.getStart()).toString();
-        LocalDateTime localStart = LocalDateTime.ofEpochSecond(sanitizedReport.getStart(), 0, ZoneOffset.UTC);
-        LocalDateTime localEnd = LocalDateTime.ofEpochSecond(sanitizedReport.getEnd(), 0, ZoneOffset.UTC);
+        LocalDateTime localStart = LocalDateTime.ofEpochSecond(sanitizedReport.getStart(), 0, ZoneOffset.of("-08:00"));
+        LocalDateTime localEnd = LocalDateTime.ofEpochSecond(sanitizedReport.getEnd(), 0, ZoneOffset.of("-08:00"));
+        date = localStart.toLocalDate().toString();
         time = String.format("%02d:%02d-%02d:%02d", localStart.getHour(), localStart.getMinute(), localEnd.getHour(),
                 localEnd.getMinute());
     }
