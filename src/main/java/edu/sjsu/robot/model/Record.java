@@ -1,13 +1,7 @@
 package edu.sjsu.robot.model;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
-
-import ch.qos.logback.core.util.Duration;
 
 public class Record {
     // { id: 1, date: "02/12/2022", time: "9:00-9:30", sanitizedHours: "3",
@@ -18,11 +12,11 @@ public class Record {
     private String location;
     private String date;
     private String time;
-    private Float sanitizedHours;
+    private Integer duration;
 
     public Record(SanitizedReport sanitizedReport) {
         id = sanitizedReport.getId();
-        sanitizedHours = sanitizedReport.getDuration();
+        duration = sanitizedReport.getDuration();
         location = sanitizedReport.getLocation();
         LocalDateTime localStart = LocalDateTime.ofEpochSecond(sanitizedReport.getStart(), 0, ZoneOffset.of("-08:00"));
         LocalDateTime localEnd = LocalDateTime.ofEpochSecond(sanitizedReport.getEnd(), 0, ZoneOffset.of("-08:00"));
@@ -31,74 +25,44 @@ public class Record {
                 localEnd.getMinute());
     }
 
-    /**
-     * @return Long return the id
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return String return the date
-     */
-    public String getDate() {
-        return date;
-    }
-
-    /**
-     * @param date the date to set
-     */
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    /**
-     * @return String return the time
-     */
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * @param time the time to set
-     */
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    /**
-     * @return Integer return the sanitizedHours
-     */
-    public Float getSanitizedHours() {
-        return sanitizedHours;
-    }
-
-    /**
-     * @param sanitizedHours the sanitizedHours to set
-     */
-    public void setSanitizedHours(Float sanitizedHours) {
-        this.sanitizedHours = sanitizedHours;
-    }
-
-    /**
-     * @return String return the location
-     */
     public String getLocation() {
         return location;
     }
 
-    /**
-     * @param location the location to set
-     */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
 }

@@ -4,32 +4,35 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 public class IncomingData {
-    private float duration;
+    private Integer duration;
     private String location;
-    private float batteryPercentage;
+    private Integer batteryPercentage;
 
     public SanitizedReport toSanitizedReport() {
         var end = Instant.now();
-
-        var minDuration = (long) (duration * 60);
-
-        var start = end.minus(minDuration, ChronoUnit.MINUTES);
+        var start = end.minus(duration, ChronoUnit.MINUTES);
 
         return new SanitizedReport(location, batteryPercentage, start.getEpochSecond(), end.getEpochSecond(), duration);
+    }
 
+    public SanitizedReport toSanitizedReport(String now) {
+        var end = Instant.parse(now);
+        var start = end.minus(duration, ChronoUnit.MINUTES);
+
+        return new SanitizedReport(location, batteryPercentage, start.getEpochSecond(), end.getEpochSecond(), duration);
     }
 
     /**
-     * @return float return the duration
+     * @return Integer return the duration
      */
-    public float getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
     /**
      * @param duration the duration to set
      */
-    public void setDuration(float duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -48,17 +51,16 @@ public class IncomingData {
     }
 
     /**
-     * @return float return the batteryPercentage
+     * @return Integer return the batteryPercentage
      */
-    public float getBatteryPercentage() {
+    public Integer getBatteryPercentage() {
         return batteryPercentage;
     }
 
     /**
      * @param batteryPercentage the batteryPercentage to set
      */
-    public void setBatteryPercentage(float batteryPercentage) {
+    public void setBatteryPercentage(Integer batteryPercentage) {
         this.batteryPercentage = batteryPercentage;
     }
-
 }

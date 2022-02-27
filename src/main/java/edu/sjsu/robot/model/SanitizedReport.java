@@ -1,11 +1,5 @@
 package edu.sjsu.robot.model;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -19,15 +13,15 @@ import javax.persistence.Table;
 public class SanitizedReport {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String location;
-    private float batteryPercentage;
+    private Integer batteryPercentage;
     private Long start;
     private Long end;
-    private float duration;
+    private Integer duration;
 
     SanitizedReport() {
     }
 
-    public SanitizedReport(String location, float batteryPercentage, Long start, Long end, float duration) {
+    public SanitizedReport(String location, Integer batteryPercentage, Long start, Long end, Integer duration) {
         super();
         this.location = location;
         this.batteryPercentage = batteryPercentage;
@@ -52,11 +46,11 @@ public class SanitizedReport {
         this.location = location;
     }
 
-    public float getBatteryPercentage() {
+    public Integer getBatteryPercentage() {
         return batteryPercentage;
     }
 
-    public void setBatteryPercentage(float batteryPercentage) {
+    public void setBatteryPercentage(Integer batteryPercentage) {
         this.batteryPercentage = batteryPercentage;
     }
 
@@ -76,11 +70,11 @@ public class SanitizedReport {
         this.end = end;
     }
 
-    public float getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -98,15 +92,14 @@ public class SanitizedReport {
         if (getClass() != obj.getClass())
             return false;
         SanitizedReport other = (SanitizedReport) obj;
-        return Float.floatToIntBits(batteryPercentage) == Float.floatToIntBits(other.batteryPercentage)
-                && Float.floatToIntBits(duration) == Float.floatToIntBits(other.duration)
-                && Objects.equals(end, other.end) && Objects.equals(location, other.location)
-                && Objects.equals(start, other.start);
+        return Objects.equals(batteryPercentage, other.batteryPercentage) && Objects.equals(duration, other.duration)
+                && Objects.equals(end, other.end) && Objects.equals(id, other.id)
+                && Objects.equals(location, other.location) && Objects.equals(start, other.start);
     }
 
     @Override
     public String toString() {
-        return "SanitizedReport [location=" + location + ", batteryPercentage=" + batteryPercentage + ", start=" + start
-                + ", end=" + end + ", duration=" + duration + "]";
+        return "SanitizedReport [id=" + id + ", location=" + location + ", batteryPercentage=" + batteryPercentage
+                + ", start=" + start + ", end=" + end + ", duration=" + duration + "]";
     }
 }
