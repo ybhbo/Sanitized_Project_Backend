@@ -20,3 +20,30 @@ Make sure that the installed mvn is in your path before running
 ### Runs the backend server
 
 ` java -jar target/robot-0.0.1-SNAPSHOT.jar edu.sjsu.robot.RobotApplication`
+
+##### POST /report
+
+This api is for the robot to send in the sanitize report
+
+Example: http://localhost:8080/report
+
+Input (json):
+```
+ {
+    "location": "ENGR 137",
+    "duration": 15,
+    "batteryPercentage": 100
+ }
+```
+
+Output (json):
+```
+{
+    "id": 11,
+    "location": "ENGR 137",
+    "batteryPercentage": 100,
+    "start": 1647795243,
+    "end": 1647796143,
+    "duration": 15
+}
+```
