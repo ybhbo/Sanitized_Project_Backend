@@ -21,6 +21,7 @@ Make sure that the installed mvn is in your path before running
 
 ` java -jar target/robot-0.0.1-SNAPSHOT.jar edu.sjsu.robot.RobotApplication`
 
+### REST APIs
 ##### POST /report
 
 This api is for the robot to send in the sanitize report
