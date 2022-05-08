@@ -53,7 +53,7 @@ class ReportController {
     @GetMapping("/report")
     List<Record> all() {
         log.info("GET /report called");
-        var all = repository.findTop10ByOrderByIdDesc();
+        var all = repository.findTop30ByOrderByIdDesc();
         return all.stream().map(sr -> {
             return new Record(sr);
         }).collect(Collectors.toList());
@@ -91,7 +91,8 @@ class ReportController {
         }
 
         var minutes = record.stream().mapToInt(r -> r.getDuration()).sum();
-        return minutes / 60.0f;
+        var hours = minutes / 60.0f;
+        return (float) (Math.round(hours * 100.0) / 100.0);
     }
 
     @CrossOrigin
@@ -148,7 +149,8 @@ class ReportController {
             return 0.0f;
         }
         var minutes = record.stream().mapToInt(r -> r.getDuration()).sum();
-        return minutes / 60.0f;
+        var hours = minutes / 60.0f;
+        return (float) (Math.round(hours * 100.0) / 100.0);
     }
 
     private ZonedDateTime from(long sec) {
