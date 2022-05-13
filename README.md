@@ -1,3 +1,6 @@
+## //Backend readme.md
+//https://github.com/ybhbo/Sanitized_Project_Backend
+
 ## Building and running the server
 
 Prerequesite dependencies: installing the java JDK and maven files.
@@ -33,18 +36,15 @@ Input (json):
  {
     "location": "ENGR 137",
     "duration": 15,
-    "batteryPercentage": 100
+    
  }
-```
+
 
 Output (json):
-```
+
 {
     "id": 11,
     "location": "ENGR 137",
-    "batteryPercentage": 100,
-    "start": 1647795243,
-    "end": 1647796143,
-    "duration": 15
+    "duration": 12
 }
 ```

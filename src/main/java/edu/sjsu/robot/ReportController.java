@@ -126,7 +126,8 @@ class ReportController {
         for (int i = 0; i < 7; i++) {
             var key = today.getDayOfWeek().toString();
             weekDays.add(key);
-            total.add(dataMap.containsKey(key) ? dataMap.get(key) : 0.0f);
+            var thisTotal = dataMap.containsKey(key) ? dataMap.get(key) : 0.0f;
+            total.add((float)(Math.round(thisTotal * 100.0) / 100.0));
             today = today.plus(1, ChronoUnit.DAYS);
         }
 
